@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Show from './views/Users/Show.vue';
+import Edit from './views/Users/Edit.vue';
 import Signup from "./views/Authentications/Signup.vue";
 import Login from "./views/Authentications/Login.vue";
 import Logout from "./views/Authentications/Logout.vue";
@@ -29,6 +30,11 @@ export default new Router({
       path: '/users/:id',
       name: 'users-show',
       component: Show
+    },
+    {
+      path: '/users/:id/edit',
+      name: 'users-edit',
+      component: Edit
     },
     {
       path: '/signup',
