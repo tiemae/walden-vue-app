@@ -22,16 +22,33 @@
       </div>
       <div class="form-group col-md-12">
         <label for="email">EMAIL:</label>
-        <input type="text" class="form-control" id="email" placeholder="enter your email address" v-model="user.email">
+        <input type="string" class="form-control" id="email" placeholder="enter your email address" v-model="user.email">
       </div>
       <div class="form-group col-md-12">
-        <label for="tag_id">SELECT YOUR HAIR TYPE:</label>
-        <input type="text" class="form-control" id="tag_id" placeholder="select your hair type" v-model="user.tag.name">
+        <label for="password">PASSWORD:</label>
+        <input type="string" class="form-control" id="password" placeholder="enter your password" v-model="password">
       </div>
+      <div class="form-group col-md-12">
+        <label for="passwordConfirmation">PASSWORD_CONFIRMATION:</label>
+        <input type="string" class="form-control" id="passwordConfirmation" placeholder="enter your password, again" v-model="passwordConfirmation">
+      </div>
+
+      <div>
+        <label>SELECT YOUR HAIR TYPE:</label>
+        <div v-for = "tag in tags" >
+          <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
+        </div>
+      <!--   <div>
+          tagId: {{tagId}}
+          Tags: {{tags.map(tag => tag.name)}}
+        </div> -->
+      </div>
+
       <div class="form-group col-md-12">
         <label for="imageUrl">IMAGE</label>
         <input type="text" class="form-control" id="imageUrl" placeholder="paste your image link" v-model="user.image_url">
       </div>
+
       <div class="form-group col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Update</button>
       </div>
@@ -49,7 +66,11 @@ export default {
   data: function() {
     return {
       user: {},
-      errors: []
+      errors: [],
+      tags: [],
+      tagId: "",
+      password: "",
+      passwordConfirmation: ""
     };
   },
   created: function() {
@@ -57,14 +78,20 @@ export default {
       this.user = response.data;
       console.log(this.user);
     });
+    axios.get("/api/tags/").then(response => {
+      this.tags = response.data;
+      console.log(this.tags);
+    });
   },
   methods: {
     submit: function() {
       var params = {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
+        password: this.password,
+        password_confirmation: this.passwordConfirmation,
         email: this.user.email,
-        tag_id: this.user.tag.id,
+        tag_id: this.tagId,
         image_url: this.user.image_url
       };
       axios.patch("/api/users/" + this.user.id, params).then(response => {
