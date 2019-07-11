@@ -6,6 +6,10 @@ import Edit from './views/Users/Edit.vue';
 import Signup from "./views/Authentications/Signup.vue";
 import Login from "./views/Authentications/Login.vue";
 import Logout from "./views/Authentications/Logout.vue";
+import PostNew from "./views/Posts/New.vue";
+import PostIndex from "./views/Posts/Index.vue";
+import PostShow from "./views/Posts/Show.vue";
+// import PostEdit from "./views/Posts/Edit.vue";
 
 Vue.use(Router);
 
@@ -50,6 +54,21 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: Logout
-    }
+    },
+    {
+      path: '/posts/new',
+      name: 'posts-new',
+      component: PostNew
+    },
+    {
+      path: '/posts',
+      name: 'posts-index',
+      component: PostIndex
+    },
+    {
+      path: '/posts/:id',     
+      name: 'posts-show',
+      component: PostShow
+    },
   ]
 });

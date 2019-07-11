@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
     
-    <img v-bind:src="user.image_url" alt="">
+    <img v-bind:src="user.image_url" alt="" height="400px" width="300px">
     <h1>{{ user.first_name.toUpperCase() }} {{ user.last_name.toUpperCase() }}</h1>
     
 
@@ -26,17 +26,18 @@
       </div>
       <div class="form-group col-md-12">
         <label for="password">PASSWORD:</label>
-        <input type="string" class="form-control" id="password" placeholder="enter your password" v-model="password">
+        <input type="string" class="form-control" id="password" placeholder="enter your new password" v-model="password">
       </div>
       <div class="form-group col-md-12">
         <label for="passwordConfirmation">PASSWORD_CONFIRMATION:</label>
-        <input type="string" class="form-control" id="passwordConfirmation" placeholder="enter your password, again" v-model="passwordConfirmation">
+        <input type="string" class="form-control" id="passwordConfirmation" placeholder="re-enter your new password" v-model="passwordConfirmation">
       </div>
 
       <div>
         <label>SELECT YOUR HAIR TYPE:</label>
-        <div v-for = "tag in tags" >
+        <div v-for = "tag in tags">
           <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
+          <img v-bind:src="tag.image_url" alt="" height="50px" width="auto"><br>
         </div>
       <!--   <div>
           tagId: {{tagId}}
@@ -50,11 +51,15 @@
       </div>
 
       <div class="form-group col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">UPDATE</button>
       </div>
+
+      <router-link v-bind:to="'/users/' + user.id + '/show'"><button>BACK TO PROFILE</button></router-link>
+
       
     </form>
 
+  
 
   </div>
 </template>
