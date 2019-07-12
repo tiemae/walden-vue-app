@@ -1,32 +1,27 @@
 <template>
-  <div class="posts-new">
+  <div class="posts-edit">      
     <div class="container">
       <form v-on:submit.prevent="submit()">
-        <h1>CREATE A POST</h1>
+        <h1>EDIT YOUR POST</h1>
         <ul>
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
         </ul>
-        <div class="form-group">
-          <label>TITLE:</label> 
-          <input type="text" required class="form-control" v-model="title">
-        </div>
+
+        <img v-bind:src="post.image_url" class="text-center" height="400px" width="auto">
+
         <div class="form-group col-md-12">
           <label for="imageUrl">IMAGE</label>
-          <input type="text" required class="form-control" id="imageUrl" placeholder="paste your image link" v-model="imageUrl">
-        </div>        
+          <input type="text" v-model="post.image_url" placeholder=post.image_url >
+        </div>         
+        <div class="form-group">
+          <label>TITLE:</label> 
+          <input type="text" required class="form-control" v-model="post.title">
+        </div> 
+
          <div class="form-group">
-          <textarea class="form-control" v-model="text" required placeholder="Tell your story...or...share some wisdom..."></textarea> 
+          <label>TEXT:</label> 
+          <textarea class="form-control" v-model="post.text" required placeholder="Tell your story...or...share some wisdom..."></textarea> 
         </div>
-
-      <div>
-        <label>SELECT YOUR TAGS:</label>
-        <div v-for = "tag in tags">
-          <input type="checkbox" :value="tag.id" v-model="tagIds"> {{ tag.name }}
-          <img v-bind:src="tag.image_url" alt="" height="50px" width="auto"><br>
-        </div>
-      </div>
-
-      {{tagIds}}
 
         <input type="submit" class="btn btn-primary" value="PUBLISH">
       </form>
@@ -40,31 +35,26 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      title: "",
-      text: "",
-      imageUrl: "",
-      tags: [],
-      tagIds: [],
+      post: {},
       errors: []
     };
   },
 
   created: function() {
-    axios.get("/api/tags/").then(response => {
-      this.tags = response.data;
-      console.log(this.tags);
+    axios.get("/api/posts/" + this.$route.params.id).then(response => {
+      this.post = response.data;
+      console.log(this.post);
     });
   },  
   methods: {
     submit: function() {
       var params = {
-        title: this.title,
-        text: this.text,
-        image_url: this.imageUrl,
-        tag_ids: this.tagIds
+        title: this.post.title,
+        text: this.post.text,
+        image_url: this.post.image_url || post.image_url,
       };
       axios
-        .post("/api/posts", params)
+        .patch("/api/posts/" + this.$route.params.id, params)
         .then(response => { 
           console.log("Success!", response.data);
           this.$router.push("/posts");

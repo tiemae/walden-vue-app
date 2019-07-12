@@ -24,7 +24,10 @@
       <router-link v-bind:to="'/posts/' + post.id">
         <img v-bind:src="post.image_url" class="text-center" height="400px" width="auto">
      
-      </router-link>  
+      </router-link> <br>
+
+       <router-link v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link>
+
     </div>
 
    <!-- add html drop down for selecting (options) -->
