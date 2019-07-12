@@ -47,7 +47,8 @@ export default {
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("user_id", response.data.user_id);
           console.log("Success!", response.data.user_id);
-          this.$router.push("/users/" + response.data.user_id);
+          this.$router.push("/posts");          
+          // this.$router.push("/users/" + response.data.user_id);
         })
         .catch(error => {
           this.errors = ["Invalid email or password."];

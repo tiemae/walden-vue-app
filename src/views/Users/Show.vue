@@ -26,7 +26,7 @@
      
       </router-link> <br>
 
-       <router-link v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link>
+<!--        <router-link v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link> -->
 
     </div>
 

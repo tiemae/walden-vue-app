@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
     
-    <img v-bind:src="user.image_url" alt="" height="400px" width="300px">
+    <img v-bind:src="user.image_url" alt="" height="400px" width="auto">
     <h1>{{ user.first_name.toUpperCase() }} {{ user.last_name.toUpperCase() }}</h1>
     
 
@@ -54,7 +54,10 @@
         <button type="submit" class="btn btn-primary">UPDATE</button>
       </div>
 
-      <router-link v-bind:to="'/users/' + user.id + '/show'"><button>BACK TO PROFILE</button></router-link>
+      <router-link v-bind:to="'/users/' + user.id + '/show'"><button>BACK TO PROFILE</button></router-link><br>
+
+
+    <button v-on:click="destroyUser()">DELETE YOUR PROFILE</button>      
 
       
     </form>
@@ -106,6 +109,18 @@ export default {
         this.errors = error.response.data.errors;
       });
     },
-  }
+
+    destroyUser: function() {
+      axios
+      .delete("/api/users/" + this.$route.params.id)
+      .then(response => {
+        console.log("User Deleted"); 
+        delete axios.defaults.headers.common["Authorization"];
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("user_id");
+        this.$router.push("/signup"); 
+      });
+    },
+  },
 };
 </script>

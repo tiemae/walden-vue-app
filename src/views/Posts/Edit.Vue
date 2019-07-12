@@ -25,6 +25,9 @@
 
         <input type="submit" class="btn btn-primary" value="PUBLISH">
       </form>
+
+      <router-link v-bind:to="'/posts/' + post.id"><button>BACK TO POST</button></router-link>
+
     </div>
   </div>
 </template>

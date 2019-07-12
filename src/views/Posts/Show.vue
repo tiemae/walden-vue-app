@@ -16,18 +16,27 @@
       <img v-bind:src="comment.user.image_url" class="text-center" height="50px" width="auto"><br><span>Comment by: {{comment.author}}</span>
       <p class="text-center">{{ comment.text }}</p>
 
-      <button v-if="comment.user.id == user_id" v-on:click="destroyComment()">DELETE THIS COMMENT</button>
+     <!--  <button v-if="comment.user.id == user_id" v-on:click="editComment(comment)">EDIT</button> -->
 
+      <form v-if="comment.user.id == user_id" v-on:submit.prevent="editComment(comment)">
+        <h1>Edit Comment</h1>
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+          <textarea v-model= "comment.text" placeholder="Write response here..."></textarea> <br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>      
+
+      <button v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)">DELETE</button>
+<!-- 
     {{comment.user.id}}
-    {{user_id}}
+    {{user_id}} -->
 
     </div>
 
 
-
-
     <div class="container">
-      <form v-on:submit.prevent="submit()">
+      <form v-if="isLoggedIn()" v-on:submit.prevent="submit()">
         <h1>Responses</h1>
         <ul>
           <li v-for="error in errors">{{ error }}</li>
@@ -35,11 +44,9 @@
           <textarea v-model= "text" required placeholder="Write response here..."></textarea> <br>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
-
-
     </div>
 
-    <router-link v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link>
+    <router-link v-if="post.user.id == user_id" v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link>
 
     <button v-if="post.user.id == user_id" v-on:click="destroyPost()">DELETE YOUR POST</button>
 
@@ -61,8 +68,7 @@ export default {
       post: {},
       errors: [],
       user_id: localStorage.getItem('user_id'),
-      text: "",
-      comments: {} 
+      text: "", 
     };
   },
   created: function() {
@@ -90,6 +96,15 @@ export default {
     });
 
     },
+    editComment: function(comment) {
+      var params = {
+      text: this.text,
+    };
+      axios
+      .patch("/api/comments/" + this.comment.id).then(response => {
+        console.log("Comment Updated");
+    });
+    },
 
     destroyPost: function() {
       axios
@@ -99,14 +114,22 @@ export default {
         this.$router.push("/posts");   
       });
     },
-    destroyComment: function() {
+    destroyComment: function(comment) {
       axios
-      .delete("/api/comments/" + "")
+      .delete("/api/comments/" + comment.id)
       .then(response => {
-        console.log("Comment Deleted");
-        this.$router.push("/posts/" + this.$route.params.id);  
+        console.log("Comment Deleted"); 
+        var index = this.post.comments.indexOf(comment);
+          this.post.comments.splice(index, 1);        
       });
-    },    
+    },   
+    isLoggedIn: function() {
+      if (localStorage.getItem('jwt')) {
+        return true;
+      } else {
+        return false;
+      }
+    }     
   }
 };
 </script>

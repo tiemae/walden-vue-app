@@ -22,10 +22,13 @@
           <label>Update a photo:</label>
           <input type="text" class="form-control" v-model="image_url">
         </div>
-        <div class="form-group">
-          <label>Pick a tag:</label>
-          <input type="integer" class="form-control" v-model="tag_id">
+      <div>
+        <label>SELECT YOUR TAGS:</label>
+        <div v-for = "tag in tags">
+          <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
+          <img v-bind:src="tag.image_url" alt="" height="50px" width="auto"><br>
         </div>
+      </div>
         <div class="form-group">
           <label>Password:</label>
           <input type="password" class="form-control" v-model="password">
@@ -52,8 +55,17 @@ export default {
       image_url: "",
       password: "",
       passwordConfirmation: "",
+      tags: [],
+      tagId: "",
       errors: []
     };
+  },
+
+  created: function() {
+    axios.get("/api/tags/").then(response => {
+      this.tags = response.data;
+      console.log(this.tags);
+    });    
   },
   methods: {
     submit: function() {
@@ -62,7 +74,7 @@ export default {
         last_name: this.last_name,
         email: this.email,
         image_url: this.image_url,
-        tag_id: this.tag_id,
+        tag_id: this.tagId,
         password: this.password,
         password_confirmation: this.passwordConfirmation
       };
@@ -72,6 +84,7 @@ export default {
           this.$router.push("/login");
         })
         .catch(error => {
+          console.log(response.data)          
           this.errors = error.response.data.errors;
         });
     }
