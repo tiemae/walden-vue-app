@@ -1,7 +1,66 @@
 
-
 <template>
+
   <div class="login">
+
+  <section class="module module-header bg-dark bg-dark-50">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-6 col-sm-offset-3">
+
+          <h2 class="module-title align-center font-alt">Login</h2>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6 col-sm-offset-3">
+
+          <form v-on:submit.prevent="submit()" id="contact-form" role="form" novalidate="">
+
+        <!--     <ul>
+              <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul> -->
+
+            <div class="form-group">
+              <label class="sr-only" for="email">Your Email</label>
+              <input type="email" id="email" class="form-control" name="email" placeholder="Your E-mail" required="" data-validation-required-message="Please enter your e-mail." aria-invalid="false" v-model="email">
+              <p class="help-block text-danger"></p>
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only" for="password">Your Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Your Password" required="" data-validation-required-message="Please enter your password." v-model="password">
+              <p class="help-block text-danger"></p>
+            </div>
+
+            <button type="submit" class="btn btn-round btn- text-danger">Submit</button>
+
+          </form>
+
+          <!-- Ajax response -->
+          <div id="contact-response" class="ajax-response font-alt"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+
+
+
+
+
+
+<!--   <div class="login">
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Login</h1>
@@ -19,7 +78,12 @@
         <input type="submit" class="btn btn-primary" value="LOGIN">
       </form>
     </div>
-  </div>
+  </div> -->
+
+
+
+
+
 </template>
 
 <script>

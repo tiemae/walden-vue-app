@@ -1,41 +1,58 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home | </router-link> 
-      <router-link to="/about"> About | </router-link>
-      <router-link to="/posts"> Posts | </router-link>
-      <router-link v-if="isLoggedIn()" to="/posts/new"> Create A Post | </router-link> 
-      <router-link v-if="!isLoggedIn()" to="/signup"> Signup | </router-link> 
-      <router-link v-if="!isLoggedIn()" to="/login"> Login | </router-link> 
-      <router-link v-if="isLoggedIn()" to="/users/me"> Profile | </router-link> 
-      <router-link v-if="isLoggedIn()" to="/logout"> Logout | </router-link> 
-      <input type="text" required class="form-control" placeholder="Search for articles" v-model="searchFilter">
-    </div>
+
+    <nav class="navbar navbar-fixed-top navbar-transparent navbar-custom" role="navigation">
+
+        <div class="container">
+      
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Walden.For Men.</a>
+          </div>
+      
+          <div class="collapse navbar-collapse" id="custom-collapse">
+      
+            <ul class="nav navbar-nav navbar-right">
+      
+              <li><router-link to="/">Home</router-link></li>
+      
+              <li><a href="/about">About</a></li>
+              <li><router-link v-if="!isLoggedIn()" to="/login"> Login </router-link></li>
+              <li><router-link to="/posts"> Posts </router-link></li>
+              <li><router-link v-if="isLoggedIn()" to="/posts/new"> Create A Post </router-link></li>
+              <li><router-link v-if="!isLoggedIn()" to="/signup"> Signup </router-link></li> 
+              <li><router-link v-if="isLoggedIn()" to="/users/me"> Profile </router-link></li>
+              <li><router-link v-if="isLoggedIn()" to="/logout"> Logout </router-link> </li>             
+              <li><a href="contact.html">Contact</a></li>
+      
+            </ul>
+          </div>
+      
+        </div>
+
+    </nav>
+
     <router-view :key="$route.path"></router-view> 
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <p class="copyright font-inc m-b-0">© 2019 <a href="index.html">Walden.For Men</a>, All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </div>
 </template>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  padding: 80px;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
 
 

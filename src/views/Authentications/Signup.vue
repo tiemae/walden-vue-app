@@ -1,6 +1,116 @@
 <template>
   <div class="signup">
-    <div class="container">
+
+      <section class="module module-header bg-dark bg-dark-50">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-sm-6 col-sm-offset-3">
+
+            <h2 class="module-title align-center font-alt">WELCOME TO WALDEN</h2>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-6 col-sm-offset-3">
+
+            <form v-on:submit.prevent="submit()" role="form" novalidate="">
+
+          <!--     <ul>
+                <li class="text-danger" v-for="error in errors">{{ error }}</li>
+              </ul> -->
+              <div class="form-group">
+                <label class="sr-only">SELECT HAIR TYPE:</label>
+                <div v-for = "tag in tags">
+                  <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
+                  <img class="image-tag" v-bind:src="tag.image_url"><br>
+                </div>
+            </div>
+
+
+
+              <div class="form-group">
+                <label class="sr-only" for="first_name">Your First Name</label>
+                <input type="text" id="first_name" class="form-control" name="first_name" placeholder="Your First Name" required="" data-validation-required-message="Please enter your first name." aria-invalid="false" v-model="first_name">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="last_name">Your last Name</label>
+                <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Your last Name" required="" data-validation-required-message="Please enter your last name." aria-invalid="false" v-model="last_name">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="image_url">Upload An Image URL</label>
+                <input type="text" id="image_url" class="form-control" name="image_url" placeholder="Upload An Image URL" required="" data-validation-required-message="Please enter Upload An Image URL." aria-invalid="false" v-model="image_url">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="email">Your Email</label>
+                <input type="email" id="email" class="form-control" name="email" placeholder="Your E-mail" required="" data-validation-required-message="Please enter your e-mail." aria-invalid="false" v-model="email">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="password">Your Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Your Password" required="" data-validation-required-message="Please enter your password." v-model="password">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="passwordConfirmation">re-enter your password</label>
+                <input type="password" id="passwordConfirmation" name="password_confirmation" class="form-control" placeholder="re-enter your password" required="" data-validation-required-message="Please re-enter your password." v-model="passwordConfirmation">
+                <p class="help-block text-danger"></p>
+              </div>
+
+              <button type="submit" class="btn btn-round btn-g">Submit</button>
+
+            </form>
+
+            <!-- Ajax response -->
+            <div id="contact-response" class="ajax-response font-alt"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>WELCOME TO WALDEN</h1>
         <ul>
@@ -39,7 +149,7 @@
         </div>
         <input type="submit" class="btn btn-primary" value="SIGN UP">
       </form>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -91,3 +201,10 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+  .image-tag{
+    max-width: 20%;
+  }
+</style>

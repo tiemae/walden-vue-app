@@ -1,7 +1,37 @@
 <template>
   <div class="posts-index">
+
+    <section class="module p-b-0">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-sm-8 col-sm-offset-2">
+
+            <!-- POST WITH IMAGE -->
+            <div class="post">
+
+              <div v-for="post in filterBy(posts, $parent.searchFilter)">
+                <router-link v-bind:to="'/posts/' + post.id">
+                  <img  class="post-thumbnail" v-bind:src="post.image_url" height="400px" width="auto">
+                </router-link>  
+                <div class="post-header">
+                  <h2 class="post-title font-alt">{{ post.title }}</h2>
+                </div>
+                <p class="post-meta font-inc"> Written by: {{ post.author }}</p>
+                <p class="post-meta font-inc"> Published on {{post.created_at}}</p> 
+                <div class="post-more font-inc">
+                  <router-link v-bind:to="'/posts/' + post.id" class="more-link">Read more</router-link>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    
     
-    <h1>WALDEN. FOR MEN</h1>
     
     
 <!--     <div v-if="$parent.isLoggedIn()" v-for="post in filteredPosts">
@@ -13,7 +43,7 @@
         <img v-bind:src="post.image_url" class="text-center" height="400px" width="auto">
       </router-link>  
     </div> -->
-    <div v-for="post in filterBy(posts, $parent.searchFilter)">
+<!--     <div v-for="post in filterBy(posts, $parent.searchFilter)">
       <h2 class="text-center">{{ post.title }}</h2>
       <p> Written by: {{ post.author }}</p>
       <p> Published on {{post.created_at}}</p> 
@@ -21,7 +51,7 @@
       <router-link v-bind:to="'/posts/' + post.id">
         <img v-bind:src="post.image_url" class="text-center" height="400px" width="auto">
       </router-link>  
-    </div>
+    </div> -->
 <!--     <div v-else="$parent.!isLoggedIn()" v-for="post in filterBy(posts, $parent.searchFilter, 'posts.title')">
       <h2 class="text-center">{{ post.title }}</h2>
       <p> Written by: {{ post.author }}</p>
