@@ -1,20 +1,18 @@
 <template>
   <div class="posts-index">
-    
-    <h1>WALDEN. FOR MEN</h1>
 
     <div>
-    <img v-bind:src="post.image_url" class="text-center" height="500px" width="auto">
-    <h2 class="text-center">{{ post.title }}</h2>
-    <p class="text-center"> writen by: {{ post.author }}</p>
+    <img v-bind:src="post.image_url" height="500px" width="auto">
+    <h2>{{ post.title }}</h2>
+    <p> writen by: {{ post.author }}</p>
     <p> Published on {{post.created_at}} </p> 
     <p class="text-center text-nowrap"> {{ post.text }} </p>
     </div>
 
     <h2>Comments</h2>
     <div v-for="comment in post.comments">
-      <img v-bind:src="comment.user.image_url" class="text-center" height="50px" width="auto"><br><span>Comment by: {{comment.author}}</span>
-      <p class="text-center">{{ comment.text }}</p>
+      <img v-bind:src="comment.user.image_url" height="50px" width="auto"><br><span>Comment by: {{comment.author}}</span>
+      <p>{{ comment.text }}</p>
 
         <form v-if="isLoggedIn()" v-on:submit.prevent="submit_reply(comment)">
         <p>NEW REPLY</p>
@@ -27,9 +25,9 @@
 
 
       <div v-for="reply in comment.replies">
-        <img v-bind:src="reply.user.image_url" class="text-center" height="50px" width="auto"><br>
+        <img v-bind:src="reply.user.image_url" height="50px" width="auto"><br>
         <span>Reply from: {{reply.author}}</span>
-        <p class="text-center">{{ reply.text }}</p>
+        <p>{{ reply.text }}</p>
 
         <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)">DELETE</button>
 

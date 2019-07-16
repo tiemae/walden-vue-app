@@ -1,36 +1,80 @@
 <template>
   <div class="posts-index">
 
+  <div class="wrapper">
+
     <section class="module p-b-0">
 
       <div class="container">
 
         <div class="row">
 
-          <div class="col-sm-8 col-sm-offset-2">
+          <div class="col-sm-6 col-sm-offset-3">
+          <!-- <div class="col-sm-6 col-md-6 col-lg-6"> -->
 
             <!-- POST WITH IMAGE -->
             <div class="post">
 
               <div v-for="post in filterBy(posts, $parent.searchFilter)">
                 <router-link v-bind:to="'/posts/' + post.id">
-                  <img  class="post-thumbnail" v-bind:src="post.image_url" height="400px" width="auto">
+                  <div class="post-thumbnail">
+                  <img v-bind:src="post.image_url">
+                  </div>
                 </router-link>  
+
                 <div class="post-header">
+                  <h1 class="post-title font-alt">{{ post.title }}</h1>
+                  <div class="post-meta font-inc">
+                    By {{ post.author}} | {{post.created_at}}
+                  </div>
+                  <div class="post-more font-inc">
+                    <router-link v-bind:to="'/posts/' + post.id" class="more-link">Read more</router-link>
+                  </div> 
+                </div>
+
+
+
+
+
+
+
+
+
+
+<!--                 <div class="post-header">
                   <h2 class="post-title font-alt">{{ post.title }}</h2>
                 </div>
                 <p class="post-meta font-inc"> Written by: {{ post.author }}</p>
                 <p class="post-meta font-inc"> Published on {{post.created_at}}</p> 
                 <div class="post-more font-inc">
                   <router-link v-bind:to="'/posts/' + post.id" class="more-link">Read more</router-link>
-                </div>
+                </div> -->
               </div>
 
             </div>
           </div>
         </div>
       </div>
-    </section>    
+    </section>   
+
+        <!-- PAGINATION -->
+    <section class="module-small p-t-10">
+
+      <div class="container">
+      
+        <div class="pagination font-inc text-uppercase">
+      
+          <a href="#"><i class="fa fa-angle-left"></i> Prev</a>
+          <a href="#">Next <i class="fa fa-angle-right"></i></a>
+      
+        </div>
+      
+      </div>
+
+    </section>
+    <!-- /PAGINATION --> 
+
+  </div>
     
     
     

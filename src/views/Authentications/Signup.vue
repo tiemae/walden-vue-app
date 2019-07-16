@@ -23,11 +23,11 @@
           <!--     <ul>
                 <li class="text-danger" v-for="error in errors">{{ error }}</li>
               </ul> -->
-              <div class="form-group">
-                <label class="sr-only">SELECT HAIR TYPE:</label>
-                <div v-for = "tag in tags">
+              <div>
+                <label class="comment clearfix font-inc">SELECT YOUR HAIR TYPE:</label>
+                <div class="font-inc comment clearfix comment-author" v-for = "tag in tags">
                   <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
-                  <img class="image-tag" v-bind:src="tag.image_url"><br>
+                  <img class="comment-avatar" v-bind:src="tag.image_url"><br>
                 </div>
             </div>
 

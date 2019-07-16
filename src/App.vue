@@ -28,7 +28,6 @@
               <li><router-link v-if="!isLoggedIn()" to="/signup"> Signup </router-link></li> 
               <li><router-link v-if="isLoggedIn()" to="/users/me"> Profile </router-link></li>
               <li><router-link v-if="isLoggedIn()" to="/logout"> Logout </router-link> </li>             
-              <li><a href="contact.html">Contact</a></li>
       
             </ul>
           </div>
