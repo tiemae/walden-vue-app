@@ -9,8 +9,9 @@
       <router-link v-if="!isLoggedIn()" to="/login"> Login | </router-link> 
       <router-link v-if="isLoggedIn()" to="/users/me"> Profile | </router-link> 
       <router-link v-if="isLoggedIn()" to="/logout"> Logout | </router-link> 
+      <input type="text" required class="form-control" placeholder="Search for articles" v-model="searchFilter">
     </div>
-    <router-view/>
+    <router-view :key="$route.path"></router-view> 
   </div>
 </template>
 
@@ -44,6 +45,7 @@ export default {
   data: function() {
     return {
       user_id: localStorage.getItem('user_id'),
+      searchFilter: "",
       // user: {}
     };
   },

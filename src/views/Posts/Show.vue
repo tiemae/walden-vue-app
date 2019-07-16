@@ -16,9 +16,29 @@
       <img v-bind:src="comment.user.image_url" class="text-center" height="50px" width="auto"><br><span>Comment by: {{comment.author}}</span>
       <p class="text-center">{{ comment.text }}</p>
 
+        <form v-if="isLoggedIn()" v-on:submit.prevent="submit_reply(comment)">
+        <p>NEW REPLY</p>
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+          <textarea v-model= "reply_text" required placeholder="Write reply here..."></textarea> <br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+
+
+      <div v-for="reply in comment.replies">
+        <img v-bind:src="reply.user.image_url" class="text-center" height="50px" width="auto"><br>
+        <span>Reply from: {{reply.author}}</span>
+        <p class="text-center">{{ reply.text }}</p>
+
+        <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)">DELETE</button>
+
+      </div>
+
+
      <!--  <button v-if="comment.user.id == user_id" v-on:click="editComment(comment)">EDIT</button> -->
 
-      <form v-if="comment.user.id == user_id" v-on:submit.prevent="editComment(comment)">
+      <form v-if="comment.user.id == user_id" v-on:submit.prevent="editComment()">
         <h1>Edit Comment</h1>
         <ul>
           <li v-for="error in errors">{{ error }}</li>
@@ -36,12 +56,12 @@
 
 
     <div class="container">
-      <form v-if="isLoggedIn()" v-on:submit.prevent="submit()">
-        <h1>Responses</h1>
+      <form v-if="isLoggedIn()" v-on:submit.prevent="submit(comment)">
+        <h1>NEW COMMENT</h1>
         <ul>
           <li v-for="error in errors">{{ error }}</li>
         </ul>
-          <textarea v-model= "text" required placeholder="Write response here..."></textarea> <br>
+          <textarea v-model= "text" required placeholder="Write your comment here..."></textarea> <br>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
@@ -69,6 +89,7 @@ export default {
       errors: [],
       user_id: localStorage.getItem('user_id'),
       text: "", 
+      reply_text: "",
     };
   },
   created: function() {
@@ -96,6 +117,24 @@ export default {
     });
 
     },
+    submit_reply: function(comment) {
+      var params = {
+      text: this.reply_text,
+      comment_id: comment.id 
+      // this would also work this.$route.params.id 
+    };
+    axios
+      .post("/api/replies", params)
+      .then(response => {
+        console.log(response.data); 
+        comment.replies.push(response.data);
+        this.reply_text = "";
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors;
+    });
+
+    },    
     editComment: function(comment) {
       var params = {
       text: this.text,
@@ -114,6 +153,15 @@ export default {
         this.$router.push("/posts");   
       });
     },
+    destroyReply: function(comment, reply) {
+      axios
+      .delete("/api/replies/" + reply.id)
+      .then(response => {
+        console.log("Reply Deleted");
+        var index = comment.replies.indexOf(reply);
+          comment.replies.splice(index, 1);    
+      });
+    },    
     destroyComment: function(comment) {
       axios
       .delete("/api/comments/" + comment.id)
