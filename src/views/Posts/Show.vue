@@ -33,16 +33,18 @@
             </div>
             <!-- /POST -->
 
-            <!-- COMMENTS-->
+            <!-- COMMENT SECTION-->
             <div class="comments" >
               <h4 class="comment-title font-alt">comments</h4>
               <div v-for="comment in post.comments">
-              <!-- COMMENT 1 -->
-              <div class="comment clearfix">
+              <!-- COMMENT -->
 
-                <div class="comment-avatar">
-                  <img v-bind:src="comment.user.image_url">
-                </div>
+                <!-- COMMENT CONTENT-->
+                <div class="comment clearfix">
+               
+                  <div class="comment-avatar">
+                    <img v-bind:src="comment.user.image_url">
+                  </div>
 
                 <div class="comment-content clearfix">
 
@@ -56,14 +58,16 @@
 
                   <div class="comment-meta font-inc">
                     {{comment.created_at}}
+                <!-- /COMMENT CONTENT-->
 
-                    <!-- Button trigger modal -->
+                    <!-- Button trigger modal for new reply-->
 
-                    <button v-if="isLoggedIn()" type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
-                      Reply
-                    </button>
-
-                    <!-- Modal -->
+                    <!-- New Reply Button -->
+                  <button v-if="isLoggedIn()" v-on:click="currentComment = comment"type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
+                    Reply
+                  </button>
+                    <!-- /New Reply Button -->
+                    <!-- New Reply Modal -->
                     <div class="modal fade comment-body" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -74,7 +78,7 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <form>
+                            <form v-on:submit.prevent="submit()">
                               <ul>
                                 <li v-for="error in errors">{{ error }}</li>
                               </ul>
@@ -85,18 +89,15 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-round btn-g btn-xs" v-on:click="submit_reply(comment)">Submit Reply</button>
+                            <button type="submit" class="btn btn-round btn-g btn-xs" v-on:click="submit_reply(currentComment)">Submit Reply</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                     <!-- Modal -->
-
+                     <!-- /New Reply Modal -->
                   </div>
-
                 </div>
-
-                <!-- COMMENT 2 -->
+                <!-- REPLY SHOW-->
                 <div class="comment clearfix" v-for="reply in comment.replies">
 
                   <div class="comment-avatar">
@@ -120,44 +121,33 @@
                     <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)" type="submit" class="btn btn-round btn-danger btn-xs">DELETE</button>
 
                   </div>
-
                 </div>
-                <!-- /COMMENT 2 -->
-
+                <!-- /REPLY SHOW-->
               </div>
-              <!-- /COMMENT 1 -->
-
+              <!-- /COMMENT -->
               </div>
-
             </div>
-            <!-- /COMMENTS -->
+            <!-- /COMMENTS SECTION -->
 
-            <!-- COMMENT FORM -->
+            <!-- NEW COMMENT FORM -->
             <div class="comment-form">
               <h4 class="comment-form-title font-alt">Add your comment</h4>
 
-              <form method="post">
+              <form v-if="isLoggedIn()" v-on:submit.prevent="submit(comment)">
 
                 <div class="form-group">
-                  <label class="sr-only" for="name">Name</label>
-                  <input type="text" id="name" class="form-control" name="name" placeholder="Name">
+                  <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                  </ul>
+                  <textarea class="form-control" rows="6" v-model= "text" required placeholder="Write your comment here..."></textarea>
                 </div>
 
-                <div class="form-group">
-                  <label class="sr-only" for="email">Name</label>
-                  <input type="text" id="email" class="form-control" name="email" placeholder="E-mail">
-                </div>
-
-                <div class="form-group">
-                  <textarea class="form-control" id="comment" name="comment" rows="6" placeholder="Comment"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-round btn-g">Post comment</button>
+                <button type="submit" class="btn btn-round btn-g" v-on:click="submit(comment)">Post comment</button>
 
               </form>
 
             </div>
-            <!-- COMMENT FORM -->
+            <!-- /NEW COMMENT FORM -->
 
           </div>
 
@@ -275,6 +265,7 @@ export default {
       user_id: localStorage.getItem('user_id'),
       text: "", 
       reply_text: "",
+      currentComment: {}
     };
   },
   created: function() {
