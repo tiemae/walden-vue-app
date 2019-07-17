@@ -69,7 +69,7 @@
                 <p class="help-block text-danger"></p>
               </div>
 
-              <button type="submit" class="btn btn-round btn-g">Submit</button>
+              <button type="submit" class="btn btn-round btn-default">Submit</button>
 
             </form>
 
