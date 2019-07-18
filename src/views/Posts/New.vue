@@ -51,11 +51,11 @@
               <div class="align-center">
                   <label class="comment clearfix font-alt"><a>SELECT TAGS FOR YOUR POST:</a></label>
                   <div class="font-inc comment clearfix comment-author align-center row multi-columns-row post-columns" v-for = "tag in tags">
-                      <div class="col-md-6">
+                      <div class="">
                       <input class="align-center post-body font-inc" type="checkbox" :value="tag.id" 
                       v-model="tagIds"> <small> {{ tag.name }}</small>
                       </div>
-                      <div class="col-md-6">
+                      <div class="">
                       <img class="align-center resize" v-bind:src="tag.image_url">
                     </div>
                 </div>
