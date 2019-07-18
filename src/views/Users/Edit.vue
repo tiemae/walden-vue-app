@@ -1,66 +1,112 @@
 <template>
   <div class="users-edit">
-    
-    <img v-bind:src="user.image_url" alt="" height="400px" width="auto">
-    <h1>{{ user.first_name.toUpperCase() }} {{ user.last_name.toUpperCase() }}</h1>
+
+
+
+    <section class="module p-b-0">
+
+      <h1 class="module-title font-alt align-center">EDIT YOUR PROFILE</h1>
+
+
+      <div class="align-center form-group">
+      <router-link class="font-inc comment clearfix" v-bind:to="'/users/' + user.id + '/show'">BACK TO PROFILE ></router-link>
+      </div>
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-sm-8 col-sm-offset-2">
+
+            <div class="post">
+
+            <div class="post-thumbnail">
+              <img v-bind:src="user.image_url">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
     
 
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
 
-    <form v-on:submit.prevent="submit()">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="first_name">FIRST NAME:</label>
+     <div class="row">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+    <form id="contact-form" role="form" novalidate="" v-on:submit.prevent="submit()">
+      <div class="form-group">
+        <div class="form-group">
+          <label class="sr-only" for="first_name">FIRST NAME:</label>
           <input type="string" class="form-control" id="firstName" placeholder="write your first name here" v-model="user.first_name">
         </div>
-        <div class="form-group col-md-6">
-          <label for="last_name">LAST NAME:</label>
+        <div class="form-group">
+          <label class="sr-only" for="last_name">LAST NAME:</label>
           <input type="string" class="form-control" id="lastName" placeholder="write your last name here" v-model="user.last_name">
         </div>
       </div>
-      <div class="form-group col-md-12">
-        <label for="email">EMAIL:</label>
+      <div class="form-group">
+        <label class="sr-only" for="email">EMAIL:</label>
         <input type="string" class="form-control" id="email" placeholder="enter your email address" v-model="user.email">
       </div>
-      <div class="form-group col-md-12">
-        <label for="password">PASSWORD:</label>
+      <div class="form-group">
+        <label class="sr-only" for="password">PASSWORD:</label>
         <input type="string" class="form-control" id="password" placeholder="enter your new password" v-model="password">
       </div>
-      <div class="form-group col-md-12">
-        <label for="passwordConfirmation">PASSWORD_CONFIRMATION:</label>
+      <div class="form-group">
+        <label class="sr-only" for="passwordConfirmation">PASSWORD_CONFIRMATION:</label>
         <input type="string" class="form-control" id="passwordConfirmation" placeholder="re-enter your new password" v-model="passwordConfirmation">
       </div>
 
-      <div>
+      <div class="form-group">
+        <label class="sr-only" for="imageUrl">IMAGE</label>
+        <input type="text" class="form-control" id="imageUrl" placeholder="paste your image link" v-model="user.image_url">
+      </div>
+
+
+      <div class="align-center">
+          <label class="comment clearfix font-alt"><a>UPDATE YOUR HAIR TYPE:</a></label>
+          <div class="font-inc comment clearfix comment-author align-center row multi-columns-row post-columns" v-for = "tag in tags">
+              <div class="">
+              <input class="align-center post-body font-inc" type="radio" :value="tag.id" 
+              v-model="tagId"> <small> {{ tag.name }}</small>
+              </div>
+              <div class="">
+              <img class="align-center resize" v-bind:src="tag.image_url">
+            </div>
+        </div>
+      <!-- </div> -->
+
+<!--       <div>
         <label>SELECT YOUR HAIR TYPE:</label>
         <div v-for = "tag in tags">
           <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
           <img v-bind:src="tag.image_url" alt="" height="50px" width="auto"><br>
-        </div>
+        </div> -->
       <!--   <div>
           tagId: {{tagId}}
           Tags: {{tags.map(tag => tag.name)}}
         </div> -->
       </div>
 
-      <div class="form-group col-md-12">
-        <label for="imageUrl">IMAGE</label>
-        <input type="text" class="form-control" id="imageUrl" placeholder="paste your image link" v-model="user.image_url">
-      </div>
+      <div class="form-group align-center module-title">
+        <button type="submit" class="btn btn-round btn-default">UPDATE</button>
 
-      <div class="form-group col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">UPDATE</button>
-      </div>
-
-      <router-link v-bind:to="'/users/' + user.id + '/show'"><button>BACK TO PROFILE</button></router-link><br>
-
-
-    <button v-on:click="destroyUser()">DELETE YOUR PROFILE</button>      
+        <button v-on:click="destroyUser()" class="btn btn-d btn-round btn-default">DELETE YOUR PROFILE</button>   
+      </div>   
 
       
     </form>
+
+  </div>
+</div>
 
   
 
@@ -124,3 +170,12 @@ export default {
   },
 };
 </script>
+
+
+<style>
+  img.resize {
+    max-width:30%;
+    max-height:30%;
+    border-radius: 50%;
+  }
+</style>

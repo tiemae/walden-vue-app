@@ -23,13 +23,15 @@
           <!--     <ul>
                 <li class="text-danger" v-for="error in errors">{{ error }}</li>
               </ul> -->
-              <div>
+
+
+<!--               <div>
                 <label class="comment clearfix font-inc">SELECT YOUR HAIR TYPE:</label>
                 <div class="font-inc comment clearfix comment-author" v-for = "tag in tags">
                   <input type="radio" :value="tag.id" v-model="tagId"> {{ tag.name }}
                   <img class="comment-avatar" v-bind:src="tag.image_url"><br>
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -69,7 +71,23 @@
                 <p class="help-block text-danger"></p>
               </div>
 
+
+              <div class="align-center">
+                  <label class="comment clearfix font-alt"><a>SELECT YOUR HAIR TYPE:</a></label>
+                  <div class="font-inc comment clearfix comment-author align-center row multi-columns-row post-columns" v-for = "tag in tags">
+                      <div class="col-md-6">
+                      <input class="align-center post-body font-inc" type="radio" :value="tag.id" 
+                      v-model="tagId"> <small> {{ tag.name }}</small>
+                      </div>
+                      <div class="col-md-6">
+                      <img class="align-center resize" v-bind:src="tag.image_url">
+                    </div>
+                </div>
+              </div>
+  
+              <div class="align-center module-title">
               <button type="submit" class="btn btn-round btn-default">Submit</button>
+              </div>
 
             </form>
 

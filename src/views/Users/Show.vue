@@ -32,8 +32,8 @@
 
 
     <div class="post-header">
-      <div class="post-title font-alt align-center">
-          {{ user.email }} | HAIR-TYPE:{{ user.tag.name }} | <router-link v-bind:to="'/users/' + user.id + '/edit'"><button type="submit" class="btn btn-g btn-xs btn-round">EDIT PROFILE</button></router-link> 
+      <div class="comment-header font-alt align-center">
+          {{ user.email }} | HAIR-TYPE: {{ user.tag.name }} | <router-link v-bind:to="'/users/' + user.id + '/edit'"><button style="border:none;" type="submit" class="btn-g btn-xs"><u>EDIT PROFILE ></u></button></router-link> 
       </div>
     </div>
 

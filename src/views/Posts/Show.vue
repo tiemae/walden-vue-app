@@ -11,14 +11,14 @@
 
             <!-- POST -->
 
-            <div class="post">
+            <div class="post align-center">
 
               <div class="post-thumbnail">
                 <img v-bind:src="post.image_url">
               </div>
 
               <div class="post-header">
-                <h1 class="post-title font-alt">{{ post.title }}</h1>
+                <h1 class="post-title font-alt"><b>{{ post.title }}</b></h1>
                 <div class="post-meta font-inc">
                   By {{post.author}} | {{post.created_at}}
                 </div>
@@ -35,21 +35,22 @@
 
             <!-- COMMENT SECTION-->
             <div class="comments" >
-              <h4 class="comment-title font-alt">comments</h4>
+              <h4 class="comment-title font-alt align-center"><u>comments</u></h4>
+
               <div v-for="comment in post.comments">
               <!-- COMMENT -->
 
                 <!-- COMMENT CONTENT-->
                 <div class="comment clearfix">
                
-                  <div class="circular-landscape">
+<!--                   <div class="circular-landscape">
                     <img v-bind:src="comment.user.image_url">
-                  </div>
+                  </div> -->
 
-                <div class="comment-content clearfix">
+                <div class="clearfix align-left">
 
                   <div class="comment-author font-inc">
-                    {{comment.author}}
+                  <p><a>{{comment.author}}</a></p>
                   </div>
 
                   <div class="comment-body">
@@ -57,28 +58,28 @@
                   </div>
 
                   <div class="comment-meta font-inc">
-                    {{comment.created_at}}
                   
                 <!-- /COMMENT CONTENT-->
 
                 <!-- BUTTON TOOLBAR CONTAINER -->
-                  <div class=btn-toolbar>
+                  <div class="align-right comment-meta font-inc">
+
+                    <small>created on: {{comment.created_at}}</small>
 
                   <!-- NEW REPLY BUTTON TRIGGER MODAL -->
-                  <button v-if="isLoggedIn()" v-on:click="currentComment = comment" type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
-                    Reply
-                  </button>
+                  <button style="border:none;" v-if="isLoggedIn()" v-on:click="currentComment = comment" type="submit" class="font-inc btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
+                    Reply</button>
                   <!-- /NEW REPLY BUTTON TRIGGER MODAL -->
 
                   <!-- DELETE COMMENT BUTTON -->
 
-                  <button v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)" type="submit" class="btn btn-round btn-d btn-xs">DELETE</button>
+                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)" type="submit" class="font-inc btn btn-round btn-g btn-xs">DELETE</button>
 
                   <!-- DELETE COMMENT BUTTON -->
 
                   <!-- EDIT COMMENT BUTTON TRIGGER MODAL -->
-                  <button v-if="comment.user.id == user_id" v-on:click.once="currentComment = comment" type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter1">
-                    EDIT
+                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click.once="currentComment = comment" type="submit" class="font-inc btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter1">
+                    EDIT 
                   </button>
                   <!-- /EDIT COMMENT BUTTON TRIGGER MODAL -->
 
@@ -144,15 +145,15 @@
                      </div>
                       <!-- /EDIT COMMENT MODAL -->
 
-                      
-                  </div>
+                      </div>
+
                 </div>
                 <!-- REPLY SHOW-->
                 <div class="comment clearfix" v-for="reply in comment.replies">
 
-                  <div class="comment-avatar">
+<!--                   <div class="comment-avatar">
                     <img v-bind:src="reply.user.image_url">
-                  </div>
+                  </div> -->
 
                   <div class="comment-content clearfix">
 
@@ -174,6 +175,7 @@
                 </div>
                 <!-- /REPLY SHOW-->
               </div>
+
 
               <!-- /COMMENT -->
               </div>
