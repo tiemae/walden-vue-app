@@ -2,7 +2,7 @@
 
   <div class="home">
 
-  <section id="home" class="module-hero module-parallax module-fade bg-dark-30" data-background="https://images.pexels.com/photos/1025586/pexels-photo-1025586.jpeg?cs=srgb&dl=animal-bald-bird-of-prey-1025586.jpg&fm=jpg">
+  <section id="home" class="module-hero module-parallax module-fade bg-dark-30" data-background="/assets/images/bird.jpg">
 
     <div class="hs-caption container">
       <div class="caption-content">
@@ -22,6 +22,10 @@
 </template>
 
 <style>
+  #home {
+    height: 600px;
+    background-image: url(/assets/images/bird.jpg)
+  }
 </style>
 
 <script>

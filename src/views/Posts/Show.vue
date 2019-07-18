@@ -26,7 +26,7 @@
 
               <div class="post-entry">
 
-                <p> {{post.text}} </p>
+                <span v-html="post.text"></span>
 
               </div>
 
@@ -42,7 +42,7 @@
                 <!-- COMMENT CONTENT-->
                 <div class="comment clearfix">
                
-                  <div class="comment-avatar">
+                  <div class="circular-landscape">
                     <img v-bind:src="comment.user.image_url">
                   </div>
 
@@ -58,16 +58,32 @@
 
                   <div class="comment-meta font-inc">
                     {{comment.created_at}}
+                  
                 <!-- /COMMENT CONTENT-->
 
-                    <!-- Button trigger modal for new reply-->
+                <!-- BUTTON TOOLBAR CONTAINER -->
+                  <div class=btn-toolbar>
 
-                    <!-- New Reply Button -->
-                  <button v-if="isLoggedIn()" v-on:click="currentComment = comment"type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
+                  <!-- NEW REPLY BUTTON TRIGGER MODAL -->
+                  <button v-if="isLoggedIn()" v-on:click="currentComment = comment" type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
                     Reply
                   </button>
-                    <!-- /New Reply Button -->
-                    <!-- New Reply Modal -->
+                  <!-- /NEW REPLY BUTTON TRIGGER MODAL -->
+
+                  <!-- DELETE COMMENT BUTTON -->
+
+                  <button v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)" type="submit" class="btn btn-round btn-d btn-xs">DELETE</button>
+
+                  <!-- DELETE COMMENT BUTTON -->
+
+                  <!-- EDIT COMMENT BUTTON TRIGGER MODAL -->
+                  <button v-if="comment.user.id == user_id" v-on:click.once="currentComment = comment" type="submit" class="btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter1">
+                    EDIT
+                  </button>
+                  <!-- /EDIT COMMENT BUTTON TRIGGER MODAL -->
+
+                  </div>
+                    <!-- NEW REPLY MODAL -->
                     <div class="modal fade comment-body" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -89,12 +105,46 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-round btn-g btn-xs" v-on:click="submit_reply(currentComment)">Submit Reply</button>
+                            <button type="submit" class="btn btn-round btn-g btn-xs" data-dismiss="modal" v-on:click.once="submit_reply(currentComment)">Submit Reply</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                     <!-- /New Reply Modal -->
+
+                    <!-- /BUTTON TOOLBAR CONTAINER -->
+
+                     <!-- /NEW REPLY MODAL -->
+
+                     <!-- EDIT COMMENT MODAL -->
+                     <div class="modal fade comment-body" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                       <div class="modal-dialog modal-dialog-centered" role="document">
+                         <div class="modal-content">
+                           <div class="modal-header">
+                             <h5 class="modal-title" id="exampleModalLongTitle">Edit This Comment</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                           </div>
+                           <div class="modal-body">
+                             <form v-on:submit.prevent="editComment(currentComment)">
+                               <ul>
+                                 <li v-for="error in errors">{{ error }}</li>
+                               </ul>
+                               <div class="form-group">
+                                 <textarea class="form-control font-inc" rows="6" v-model= "currentComment.text" required placeholder="comment.text"></textarea>
+                               </div>
+                             </form>
+                           </div>
+                           <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             <button type="submit" class="btn btn-round btn-g btn-xs" data-dismiss="modal">Submit</button>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                      <!-- /EDIT COMMENT MODAL -->
+
+                      
                   </div>
                 </div>
                 <!-- REPLY SHOW-->
@@ -118,12 +168,13 @@
                       {{ reply.created_at}}
                     </div>
 
-                    <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)" type="submit" class="btn btn-round btn-danger btn-xs">DELETE</button>
+                    <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)" type="submit" class="btn btn-round btn-d btn-xs">DELETE</button>
 
                   </div>
                 </div>
                 <!-- /REPLY SHOW-->
               </div>
+
               <!-- /COMMENT -->
               </div>
             </div>
@@ -142,7 +193,7 @@
                   <textarea class="form-control" rows="6" v-model= "text" required placeholder="Write your comment here..."></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-round btn-g" v-on:click="submit(comment)">Post comment</button>
+                <button type="submit" class="btn btn-round btn-g">Post comment</button>
 
               </form>
 
@@ -153,106 +204,40 @@
 
         </div>
 
+
+        <div class="comment-form">
+
+          <router-link v-if="post.user.id == user_id" v-bind:to="'/posts/' + post.id + '/edit'"><button type="submit" class="btn btn-round btn-g col-sm-4 col-sm-offset-2">EDIT YOUR POST</button></router-link>
+
+          <button v-if="post.user.id == user_id" v-on:click="destroyPost()" type="submit" class="btn btn-round btn-d col-sm-4 col-sm-offset-0">DELETE YOUR POST</button>
+        </div>
       </div>
 
     </section>
     <!-- /BLOG SINGLE -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- cccccccccc OLD cccccccccccc-->
-
-  <!--   <div>
-    <img v-bind:src="post.image_url" height="500px" width="auto">
-    <h2>{{ post.title }}</h2>
-    <p> writen by: {{ post.author }}</p>
-    <p> Published on {{post.created_at}} </p> 
-    <p class="text-center text-nowrap"> {{ post.text }} </p>
-    </div>
-
-    <h2>Comments</h2>
-    <div v-for="comment in post.comments">
-      <img v-bind:src="comment.user.image_url" height="50px" width="auto"><br><span>Comment by: {{comment.author}}</span>
-      <p>{{ comment.text }}</p>
-
-        <form v-if="isLoggedIn()" v-on:submit.prevent="submit_reply(comment)">
-        <p>NEW REPLY</p>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
-          <textarea v-model= "reply_text" required placeholder="Write reply here..."></textarea> <br>
-        <input type="submit" class="btn btn-primary" value="Submit">
-      </form>
-
-
-      <div v-for="reply in comment.replies">
-        <img v-bind:src="reply.user.image_url" height="50px" width="auto"><br>
-        <span>Reply from: {{reply.author}}</span>
-        <p>{{ reply.text }}</p>
-
-        <button v-if="reply.user.id == user_id" v-on:click="destroyReply(comment, reply)">DELETE</button>
-
-      </div>
-
-
-      <button v-if="comment.user.id == user_id" v-on:click="editComment(comment)">EDIT</button>
-
-      <form v-if="comment.user.id == user_id" v-on:submit.prevent="editComment()">
-        <h1>Edit Comment</h1>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
-          <textarea v-model= "comment.text" placeholder="Write response here..."></textarea> <br>
-        <input type="submit" class="btn btn-primary" value="Submit">
-      </form>      
-
-      <button v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)">DELETE</button>
-      
-      {{comment.user.id}}
-      {{user_id}} -->
-
-    <!-- </div>
-
-
-    <div class="container">
-      <form v-if="isLoggedIn()" v-on:submit.prevent="submit(comment)">
-        <h1>NEW COMMENT</h1>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
-          <textarea v-model= "text" required placeholder="Write your comment here..."></textarea> <br>
-        <input type="submit" class="btn btn-primary" value="Submit">
-      </form> -->
-    <!-- </div>
-
-    <router-link v-if="post.user.id == user_id" v-bind:to="'/posts/' + post.id + '/edit'"><button>EDIT YOUR POST</button></router-link>
-
-    <button v-if="post.user.id == user_id" v-on:click="destroyPost()">DELETE YOUR POST</button> --> -->
-
-      <!-- v-if="post.user.id = $parent.user_id" -->
-
-      <!--  {{post.user.id}} -->
-      <!--    {{$parent.user.id}} this wouldn't load automatically, it needed a refresh :/ --> 
-      <!--     {{user_id}} -->
-
-
-
-      <!-- cccccccc  OLD ccccccccccc-->
   </div>
 </template>
+
+<style>
+  .circular-landscape {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-top: 10px;
+  }
+
+  .circular-landscape img {
+    width: auto;
+    height: 100%;
+
+  }
+</style>
 
 <script>
 import axios from "axios";
