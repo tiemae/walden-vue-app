@@ -16,9 +16,9 @@
 
       </div>
 
-      <div class="row">
+      <div class="row ">
 
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-4 col-sm-offset-4">
 
           <form v-on:submit.prevent="submit()" id="contact-form" role="form" novalidate="">
 
@@ -38,7 +38,9 @@
               <p class="help-block text-danger"></p>
             </div>
 
-            <button type="submit" class="btn btn-default btn-round">Submit</button>
+            <div class="align-center module-title"> 
+              <button type="submit" class="btn btn-default btn-round">Submit</button>
+            </div>
 
           </form>
 
