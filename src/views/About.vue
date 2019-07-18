@@ -25,6 +25,46 @@
 
   </div>
 </section>
+
+
+<!-- CONTENT BOX -->
+<div class="col-sm-4">
+  <div class="content-box">
+    <div class="content-box-icon">
+      <span class="icon-phone"></span>
+    </div>
+    <div class="content-box-title font-inc">
+      +1 234 567 8990
+    </div>
+  </div>
+</div>
+<!-- /CONTENT BOX -->
+
+<!-- CONTENT BOX -->
+<div class="col-sm-4">
+  <div class="content-box">
+    <div class="content-box-icon">
+      <span class="icon-envelope"></span>
+    </div>
+    <div class="content-box-title font-inc">
+      contact@waldenformen.com
+    </div>
+  </div>
+</div>
+<!-- /CONTENT BOX -->
+
+<!-- CONTENT BOX -->
+<div class="col-sm-4">
+  <div class="content-box">
+    <div class="content-box-icon">
+      <span class="icon-map-pin"></span>
+    </div>
+    <div class="content-box-title font-inc">
+      007 Milk Steet, Boston, USA
+    </div>
+  </div>
+</div>
+<!-- /CONTENT BOX -->
   
 </div>
 

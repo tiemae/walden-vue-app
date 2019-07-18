@@ -87,10 +87,11 @@
 
 
           <div class="post-header">
-            <h1 class="module-title font-alt align-center">YOUR LATEST POSTS:</h1>
+            <h1 class="module-title font-alt align-center"><small>YOUR POSTS:</small></h1>
 
 
             <div v-for="post in user.posts" class="col-sm-6 col-md-6 col-lg-6">
+
               <div class="post">
                 <div class="post-thumbnail">
                   <router-link v-bind:to="'/posts/' + post.id"> <img v-bind:src="post.image_url"  ></router-link>

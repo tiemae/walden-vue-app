@@ -39,13 +39,13 @@
     <router-view :key="$route.path"></router-view> 
 
     <footer>
-      <div class="container">
-        <div class="row">
+<!--       <div class="container"> -->
+<!--         <div class="row"> -->
           <div class="col-sm-12 text-center">
             <p class="copyright font-inc m-b-0">© 2019 <a href="index.html">Walden.For Men</a>, All Rights Reserved.</p>
           </div>
-        </div>
-      </div>
+<!--         </div> -->
+<!--       </div> -->
     </footer>
 
   </div>
