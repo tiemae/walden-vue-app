@@ -9,7 +9,7 @@
 
 
       <div class="align-center form-group">
-      <router-link class="font-inc comment clearfix" v-bind:to="'/users/' + user.id + '/show'">BACK TO PROFILE ></router-link>
+      <router-link class="font-inc comment clearfix" v-bind:to="'/users/' + user.id">BACK TO PROFILE ></router-link>
       </div>
 
       <div class="container">
