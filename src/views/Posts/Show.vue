@@ -64,23 +64,21 @@
                 <!-- BUTTON TOOLBAR CONTAINER -->
                   <div class="align-right comment-meta font-inc">
 
-                    <small>created on: {{comment.created_at}}</small>
+                    <small>created on: {{comment.created_at}}                 </small>      
 
                   <!-- NEW REPLY BUTTON TRIGGER MODAL -->
                   <button style="border:none;" v-if="isLoggedIn()" v-on:click="currentComment = comment" type="submit" class="font-inc btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
-                    Reply</button>
+                    <b>Reply >></b></button>
                   <!-- /NEW REPLY BUTTON TRIGGER MODAL -->
 
                   <!-- DELETE COMMENT BUTTON -->
 
-                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)" type="submit" class="font-inc btn btn-round btn-g btn-xs">DELETE</button>
+                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click="destroyComment(comment)" type="submit" class="font-inc btn btn-round btn-g btn-xs"><b>DELETE >></b></button>
 
                   <!-- DELETE COMMENT BUTTON -->
 
                   <!-- EDIT COMMENT BUTTON TRIGGER MODAL -->
-                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click.once="currentComment = comment" type="submit" class="font-inc btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter1">
-                    EDIT 
-                  </button>
+                  <button style="border:none;" v-if="comment.user.id == user_id" v-on:click.once="currentComment = comment" type="submit" class="font-inc btn btn-round btn-g btn-xs" data-toggle="modal" data-target="#exampleModalCenter1"><b>EDIT >></b></button>
                   <!-- /EDIT COMMENT BUTTON TRIGGER MODAL -->
 
                   </div>
