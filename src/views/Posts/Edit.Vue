@@ -8,7 +8,7 @@
 
 
           <div class="align-center form-group">
-          <router-link class="font-inc comment clearfix" v-bind:to="'/posts/' + post.id + '/show'">BACK TO POST ></router-link>
+          <router-link class="font-inc comment clearfix" v-bind:to="'/posts/' + post.id">BACK TO POST ></router-link>
           </div>
 
           <div class="container">
