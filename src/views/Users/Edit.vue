@@ -39,7 +39,7 @@
 
      <div class="row">
 
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-4 col-sm-offset-4">
 
     <form id="contact-form" role="form" novalidate="" v-on:submit.prevent="submit()">
       <div class="form-group">
@@ -97,9 +97,9 @@
       </div>
 
       <div class="form-group align-center module-title">
-        <button type="submit" class="btn btn-round btn-default">UPDATE</button>
+        <button type="submit" class="btn btn-round btn-default">UPDATE PROFILE</button> | 
 
-        <button v-on:click="destroyUser()" class="btn btn-d btn-round btn-default">DELETE YOUR PROFILE</button>   
+        <button v-on:click="destroyUser()" class="btn btn-d btn-round btn-default">DELETE ACCOUNT</button>   
       </div>   
 
       

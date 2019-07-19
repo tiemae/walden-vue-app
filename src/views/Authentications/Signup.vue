@@ -80,7 +80,7 @@
                       v-model="tagId"> <small> {{ tag.name }}</small>
                       </div>
                       <div class="">
-                      <img class="align-center" id="small" v-bind:src="tag.image_url">
+                      <img class="align-center resize" v-bind:src="tag.image_url">
                     </div>
                 </div>
               </div>
@@ -100,8 +100,6 @@
 
       </div>
     </section>
-
-
 
 
 
@@ -224,7 +222,7 @@ export default {
 
 
 <style scoped>
-  #small {
-    height: 50px;
+  .image-tag{
+    max-width: 20%;
   }
 </style>

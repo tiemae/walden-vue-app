@@ -90,7 +90,9 @@
             <h1 class="module-title font-alt align-center"><small>YOUR POSTS:</small></h1>
 
 
-            <div v-for="post in user.posts" class="col-sm-6 col-md-6 col-lg-6">
+            <div v-for="post in user.posts" class="align-center">
+
+              <div class="col-sm-6 col-md-6 col-lg-6 align-center">
 
               <div class="post">
                 <div class="post-thumbnail">
@@ -99,6 +101,7 @@
                 <h2 class="post-title font-alt text-center">{{ post.title }}</h2>
                 <div class="post-meta font-inc text-center"> Published on {{post.created_at}} <br></div>
               </div>
+            </div>
             </div>
      
 
