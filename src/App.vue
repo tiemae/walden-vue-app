@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <nav class="navbar navbar-fixed-top navbar-transparent navbar-custom" role="navigation">
+    <nav class="navbar navbar-fixed-top navbar-custom" role="navigation">
 
         <div class="container">
       

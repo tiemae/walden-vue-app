@@ -23,9 +23,10 @@
 
 <style>
   #home {
-    height: 600px;
+    height: 650px;
     background-image: url(/assets/images/bird.jpg)
   }
+
 </style>
 
 <script>
